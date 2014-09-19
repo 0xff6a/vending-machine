@@ -34,27 +34,28 @@ class Change
   end
 
   def self.change_for(value)
-    change_factory(value_to_denominations(value))
+    change_factory(change_data_for(value))
   end
 
   private 
 
-  def self.value_to_denominations(value)
-    result = []
-    while value != 0
-      closest_result = closest_denomination(value)
-      result << [closest_result, value / closest_result]
-      value %= closest_result
+  def self.change_data_for(value)
+    remove_zero_amounts(all_change_data_for(value))
+  end
+
+  def self.all_change_data_for(value)
+    denominations_below(value).reverse.map do |denomination|
+      count, value = value, value % denomination
+      [denomination, count / denomination]
     end
-    result
   end
 
-  def self.closest_denomination(value)
-    VALID_DENOMINATIONS.keys.select {|denom| denom <= value }.min_by{ |denom| (denom - value).abs }
+  def self.remove_zero_amounts(money_data)
+    money_data.reject{ |denom, amt| amt == 0 }
   end
 
-  def self.change_factory(change_data_array)
-    change_data_array.map{ |denom, amt| Change.new(denom, amt) }
+  def self.change_factory(money_data)
+    money_data.map{ |denom, amt| Change.new(denom, amt) }
   end
 
   def denomination_error
@@ -62,7 +63,15 @@ class Change
   end
 
   def valid_denomination?
-    VALID_DENOMINATIONS.keys.include?(denomination)
+    denominations.include?(denomination)
+  end
+
+  def self.denominations_below(value)
+    VALID_DENOMINATIONS.keys.select {|denom| denom <= value }
+  end
+
+  def denominations
+    VALID_DENOMINATIONS.keys
   end
 
 end

@@ -36,14 +36,10 @@ describe Change do
   
   end
 
-  context 'calculating change for a given value'
-
-    it 'should calculate the closest, highest denomination to a value' do
-      expect(Change.closest_denomination(41)).to eq(20)
-    end
+  context '#change_for'
 
     it 'should break a value into a collection of change' do
-      expect(Change.change_for(21)).to eq [Change.new(20,1), Change.new(1,1)]
+      expect(Change.change_for(21)) == [Change.new(20,1), Change.new(1,1)]
     end
 
 end
