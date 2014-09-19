@@ -33,7 +33,29 @@ class Change
     denomination_error unless valid_denomination?
   end
 
+  def self.change_for(value)
+    change_factory(value_to_denominations(value))
+  end
+
   private 
+
+  def self.value_to_denominations(value)
+    result = []
+    while value != 0
+      closest_result = closest_denomination(value)
+      result << [closest_result, value / closest_result]
+      value %= closest_result
+    end
+    result
+  end
+
+  def self.closest_denomination(value)
+    VALID_DENOMINATIONS.keys.select {|denom| denom <= value }.min_by{ |denom| (denom - value).abs }
+  end
+
+  def self.change_factory(change_data_array)
+    change_data_array.map{ |denom, amt| Change.new(denom, amt) }
+  end
 
   def denomination_error
     raise "change must have a valid denomination"
@@ -43,5 +65,5 @@ class Change
     VALID_DENOMINATIONS.keys.include?(denomination)
   end
 
-
 end
+
