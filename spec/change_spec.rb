@@ -14,7 +14,8 @@ describe Change do
       expect(change.amount).to eq(5)
     end
 
-    xit 'should only accept valid denominations' do
+    it 'should only accept valid denominations' do
+      expect { Change.new(13, 5) }.to raise_error(RuntimeError, "change must have a valid denomination")
     end
 
   end
@@ -27,6 +28,12 @@ describe Change do
 
   end
 
+  context '#display_denomination' do
 
+    it 'should display denomination in clear format' do
+      expect(change.display_denomination).to eq('50p')
+    end
+  
+  end
 
 end
