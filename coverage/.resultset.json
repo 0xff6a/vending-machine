@@ -1,6 +1,22 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/jeremyfox/Ruby/TechTests/vending-machine/lib/change.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        3,
+        3,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
       "/Users/jeremyfox/Ruby/TechTests/vending-machine/lib/product.rb": [
         1,
         null,
@@ -14,6 +30,6 @@
         null
       ]
     },
-    "timestamp": 1411142784
+    "timestamp": 1411143679
   }
 }
