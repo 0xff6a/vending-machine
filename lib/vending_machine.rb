@@ -7,6 +7,19 @@ class VendingMachine
     @coins = coins
   end
 
+  def purchase(product_id, money)
+    product_by(product_id) if exact_change_given?(product_id, money)
+  end
+
+  def release_product(product_id)
+    product_ids.include?(product_id) ? remove_product_from_stock(product_id) : no_product_error
+    product_by(product_id)
+  end
+
+  def remove_product_from_stock(id)
+    basket_for(product_by(id)).update_stock(-1)
+  end
+
   def basket_reload(new_baskets)
     new_baskets.each { |basket| product_present?(basket) ? 
           update_stock_with(basket) : add_basket(basket) }
@@ -21,8 +34,16 @@ class VendingMachine
     baskets.map(&:product)
   end
 
+  def product_ids
+    products.map(&:id)
+  end
+
   def denominations
     coins.map(&:denomination)
+  end
+
+  def product_by(id)
+    products[product_ids.index(id)]
   end
 
   def basket_for(product)
@@ -41,10 +62,10 @@ class VendingMachine
 
   def add_change(change)
     @coins << change
-  end
+  end 
 
   def update_stock_with(new_basket)
-    basket_for(new_basket.product).stock += new_basket.stock
+    basket_for(new_basket.product).update_stock(new_basket.stock)
   end
 
   def update_denomination_amount(new_change)
@@ -57,6 +78,14 @@ class VendingMachine
 
   def change_present?(change)
     denominations.include?(change.denomination)
+  end
+
+  def no_product_error
+    raise 'The specified product does not exist'
+  end
+
+  def exact_change_given?(product_id, money)
+    money == product_by(product_id).price
   end
 
 end

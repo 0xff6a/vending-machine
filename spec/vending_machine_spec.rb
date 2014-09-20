@@ -2,10 +2,10 @@ require 'vending_machine'
 
 describe VendingMachine do
   
-  let(:product) { double Product, id: 0, price: 5                              }
-  let(:basket)  { double Basket, product: product, stock: 8, :stock= => nil    }
-  let(:change)  { double Change, denomination: 5, amount: 30                   }
-  let(:vend)    { VendingMachine.new([basket], [change])                       }
+  let(:product) { double Product, id: 0, price: 55                                }
+  let(:basket)  { double Basket, product: product, stock: 8, :update_stock => nil }
+  let(:change)  { double Change, denomination: 5, amount: 30                      }
+  let(:vend)    { VendingMachine.new([basket], [change])                          }
 
   context 'Initialisation' do
 
@@ -22,7 +22,7 @@ describe VendingMachine do
   context 'Reloading' do
 
     it 'can be reloaded with baskets' do
-      expect(vend.baskets.first).to receive(:stock=).with(basket.stock * 2)
+      expect(vend.baskets.first).to receive(:update_stock).with(basket.stock)
       vend.basket_reload([basket])
     end
 
@@ -33,15 +33,25 @@ describe VendingMachine do
 
   end
 
-  xcontext 'Vending' do
+  context 'Vending' do
+
+    it 'can release a product' do
+      expect(vend.release_product(0)).to eq product
+    end
+
+    it 'raises an error if trying to release a product not loaded' do
+      expect{ vend.release_product(13) }.
+          to raise_error(RuntimeError, 'The specified product does not exist')
+    end
 
     it 'returns a selected product if enough money is provided' do
+      expect(vend.purchase(0, 55)).to eq product
     end
 
-    it 'returns change if too much money is provided' do 
+    xit 'returns change if too much money is provided' do 
     end
 
-    it 'requests more money if not enough is provided' do
+    xit 'requests more money if not enough is provided' do
     end
 
   end
