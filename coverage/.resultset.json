@@ -1,6 +1,18 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/jeremyfox/Ruby/TechTests/vending-machine/lib/basket.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        null
+      ],
       "/Users/jeremyfox/Ruby/TechTests/vending-machine/lib/change.rb": [
         1,
         null,
@@ -103,13 +115,13 @@
         1,
         null,
         1,
-        2,
-        2,
+        3,
+        3,
         null,
         null,
         null
       ]
     },
-    "timestamp": 1411210228
+    "timestamp": 1411211037
   }
 }
