@@ -2,9 +2,10 @@ require 'vending_machine'
 
 describe VendingMachine do
   
-  let(:product)    { double Product, id: 0, price: 5              }
-  let(:change)     { double Change, denomination: 5, amount: 30   }
-  let(:vend)       { VendingMachine.new([product], [change])      }
+  let(:product)    { double Product, id: 0, price: 5                              }
+  let(:basket)     { double Basket, product: product, stock: 8, :stock= => nil    }
+  let(:change)     { double Change, denomination: 5, amount: 30                   }
+  let(:vend)       { VendingMachine.new([basket], [change])                       }
 
   context 'Initialisation' do
 
@@ -12,17 +13,17 @@ describe VendingMachine do
       expect(vend.coins).to eq [change]
     end
 
-    it 'should be loaded with products' do
-      expect(vend.products).to eq [product]
+    it 'should be loaded with baskets' do
+      expect(vend.baskets).to eq [basket]
     end
 
   end
 
   context 'Reloading' do
 
-    it 'can be reloaded with products' do
-      vend.product_reload([product])
-      expect(vend.products).to eq [product, product]
+    it 'can be reloaded with baskets' do
+      expect(basket).to receive(:stock=).with(basket.stock * 2)
+      vend.basket_reload([basket])
     end
 
     it 'can be reloaded with change' do
