@@ -36,10 +36,12 @@ describe Change do
   
   end
 
-  context '#change_for'
+  context '#change_for' do
 
     it 'should break a value into a collection of change' do
       expect(Change.change_for(21)) == [Change.new(20,1), Change.new(1,1)]
     end
+
+  end
 
 end

@@ -71,28 +71,15 @@
         null,
         null,
         1,
+        1,
+        null,
+        null,
+        1,
         9,
         null,
         null,
         1,
         9,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/jeremyfox/Ruby/TechTests/vending-machine/lib/money.rb": [
-        1,
-        null,
-        1,
-        null,
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
         null,
         null,
         null,
@@ -109,8 +96,20 @@
         null,
         null,
         null
+      ],
+      "/Users/jeremyfox/Ruby/TechTests/vending-machine/lib/vending_machine.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        null
       ]
     },
-    "timestamp": 1411171165
+    "timestamp": 1411210228
   }
 }

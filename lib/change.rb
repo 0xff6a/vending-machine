@@ -44,9 +44,9 @@ class Change
   end
 
   def self.all_change_data_for(value)
-    denominations_below(value).reverse.map do |denomination|
-      count, value = value, value % denomination
-      [denomination, count / denomination]
+    ordered_denominations_below(value).map do |denom|
+      count, value = (value / denom), (value % denom)
+      [denom, count]
     end
   end
 
@@ -64,6 +64,10 @@ class Change
 
   def valid_denomination?
     denominations.include?(denomination)
+  end
+
+  def self.ordered_denominations_below(value)
+    denominations_below(value).reverse
   end
 
   def self.denominations_below(value)
