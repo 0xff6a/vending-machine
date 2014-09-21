@@ -15,10 +15,10 @@ Objectives:
 
 Classes:
 --------
-Vending Machine: returns a product in exchange for money
-Product: item with a price and id
-Basket: A collection of products
-Change: has a denomination and amount
+- Vending Machine: returns a product in exchange for money
+- Product: item with a price and id
+- Basket: A collection of products
+- Change: has a denomination and amount
 
 Workings:
 ---------
