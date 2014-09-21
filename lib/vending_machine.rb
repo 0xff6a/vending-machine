@@ -8,7 +8,8 @@ class VendingMachine
   end
 
   def purchase(product_id, money)
-    product_by(product_id) if exact_change_given?(product_id, money)
+    return release_product(product_id) if exact_change_given?(product_id, money)
+    insufficient_funds_msg if insufficient_change_given?(product_id, money)
   end
 
   def release_product(product_id)
@@ -84,8 +85,16 @@ class VendingMachine
     raise 'The specified product does not exist'
   end
 
+  def insufficient_funds_msg
+    puts 'Insufficient funds'
+  end
+
   def exact_change_given?(product_id, money)
     money == product_by(product_id).price
+  end
+
+  def insufficient_change_given?(product_id, money)
+    money < product_by(product_id).price
   end
 
 end

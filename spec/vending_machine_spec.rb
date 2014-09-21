@@ -49,9 +49,12 @@ describe VendingMachine do
     end
 
     xit 'returns change if too much money is provided' do 
+      
     end
 
-    xit 'requests more money if not enough is provided' do
+    it 'requests more money if not enough is provided' do
+      expect(STDOUT).to receive(:puts).with('Insufficient funds')
+      expect(vend.purchase(0, 25)).to be nil
     end
 
   end
