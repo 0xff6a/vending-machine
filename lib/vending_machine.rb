@@ -21,8 +21,9 @@ class VendingMachine
   end
 
   def release_change(money, product_id)
-
-    Change.change_for(money - price_by(product_id))
+    coins = Change.change_for(money - price_by(product_id))
+    coin_release(coins)
+    coins
   end
 
   def release_product(product_id)
@@ -73,6 +74,8 @@ class VendingMachine
   end
 
   private
+
+  alias_method :coin_release, :coin_reload
 
   def add_basket(new_basket)
     @baskets << new_basket

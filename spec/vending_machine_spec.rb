@@ -49,7 +49,9 @@ describe VendingMachine do
     end
 
     it 'returns change if too much money is provided' do 
-      expect(vend.purchase(0, 70)).to eq [product, [Change.new(10, 1), Change.new(5,1)]]
+      expect(vend).to receive(:coin_release).and_return(nil)
+      expect(Change).to receive(:change_for).with(15).and_return(change)
+      expect(vend.purchase(0, 70)).to eq [product, change]
     end
 
     it 'requests more money if not enough is provided' do
