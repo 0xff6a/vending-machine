@@ -39,7 +39,11 @@ describe Change do
   context '#change_for' do
 
     it 'should break a value into a collection of change' do
-      expect(Change.change_for(21)) == [Change.new(20,1), Change.new(1,1)]
+      result = Change.change_for(21)
+      expect(result.first.denomination).to eq 20
+      expect(result.first.amount).to eq 1
+      expect(result.last.denomination).to eq 1
+      expect(result.last.amount).to eq 1
     end
 
   end

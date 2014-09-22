@@ -9,7 +9,20 @@ class VendingMachine
 
   def purchase(product_id, money)
     return release_product(product_id) if exact_change_given?(product_id, money)
-    insufficient_funds_msg if insufficient_change_given?(product_id, money)
+    insufficient_change_given?(product_id, money) ? insufficient_funds_msg :
+        release_product_with_change(product_id, money)
+  end
+
+  def release_product_with_change(product_id, money)
+    [ 
+      release_product(product_id), 
+      release_change(money, product_id)
+    ]
+  end
+
+  def release_change(money, product_id)
+
+    Change.change_for(money - price_by(product_id))
   end
 
   def release_product(product_id)
@@ -43,6 +56,10 @@ class VendingMachine
     coins.map(&:denomination)
   end
 
+  def price_by(id)
+    product_by(id).price
+  end
+
   def product_by(id)
     products[product_ids.index(id)]
   end
@@ -51,7 +68,7 @@ class VendingMachine
     baskets[products.index(product)]
   end
 
-  def change_for(denomination)
+  def change_by(denomination)
     coins[denominations.index(denomination)]
   end
 
@@ -70,7 +87,7 @@ class VendingMachine
   end
 
   def update_denomination_amount(new_change)
-    change_for(new_change.denomination).amount += new_change.amount
+    change_by(new_change.denomination).amount += new_change.amount
   end
 
   def product_present?(basket)

@@ -48,8 +48,8 @@ describe VendingMachine do
       expect(vend.purchase(0, 55)).to eq product
     end
 
-    xit 'returns change if too much money is provided' do 
-      
+    it 'returns change if too much money is provided' do 
+      expect(vend.purchase(0, 70)).to eq [product, [Change.new(10, 1), Change.new(5,1)]]
     end
 
     it 'requests more money if not enough is provided' do
