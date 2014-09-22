@@ -13,7 +13,8 @@ class Change
     200 => '£2'
   }
 
-  attr_reader :denomination, :amount
+  attr_reader   :denomination
+  attr_accessor :amount
 
   def initialize(denomination_in_pence, amount)
     @denomination = denomination_in_pence

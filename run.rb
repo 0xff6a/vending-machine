@@ -8,6 +8,16 @@ def create_baskets(products, stock)
   products.map { |product| Basket.new(product, stock) }
 end
 
+def user_interface(vending_machine)
+  puts 'Please enter a product id:'
+  id = gets.chomp.to_i
+  puts 'Please enter money provided'
+  money = gets.chomp.to_i
+  
+  vending_machine.purchase(id, money)
+  puts vending_machine.purchase(id, money).inspect
+end
+
 def main
   products = 
   [
@@ -20,6 +30,8 @@ def main
   baskets = create_baskets(products, 10)
 
   vending_machine = VendingMachine.new(baskets, coins)
+  puts vending_machine.inspect
+  user_interface(vending_machine)
 end
 
 #---------Run Call-----------------
