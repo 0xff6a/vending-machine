@@ -9,6 +9,7 @@ class VendingMachine
 
   def purchase(product_id, money)
     return release_product(product_id) if exact_change_given?(product_id, money)
+    
     insufficient_change_given?(product_id, money) ? insufficient_funds_msg :
         release_product_with_change(product_id, money)
   end

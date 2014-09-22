@@ -22,6 +22,8 @@ Classes:
 
 Workings:
 ---------
+- Change object is creating using denominations in pence rather than strings e.g '£1', but could be easily adapted to translate if required
+- Did not add functionality to reload machine to runner script due to time constraints but functionality is demonstrated in tests
 
 Running the test suite:
 -----------------------
@@ -45,6 +47,8 @@ Machine Contents
 Please enter a product id:
 1
 Please enter money provided
-80
-[#<Product:0x007fc9ca05ff78 @id=1, @price=75>, [#<Change:0x007fc9ca04d648 @denomination=5, @amount=1>]]
+99
+[#<Product:0x007fc97085e7b0 @id=1, @price=75>,     
+[#<Change:0x007fc97084d2d0 @denomination=20, @amount=1>,     
+#<Change:0x007fc97084d280 @denomination=2, @amount=2>]]
 ```
