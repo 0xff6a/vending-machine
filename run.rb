@@ -28,9 +28,9 @@ def main
 
   coins = create_coins(50)
   baskets = create_baskets(products, 10)
-
   vending_machine = VendingMachine.new(baskets, coins)
-  puts vending_machine.inspect
+  puts 'Machine Contents'
+  puts vending_machine.products.inspect
   user_interface(vending_machine)
 end
 

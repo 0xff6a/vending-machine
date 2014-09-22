@@ -25,8 +25,26 @@ Workings:
 
 Running the test suite:
 -----------------------
-$ rspec from root
+From root directory:
+```shell
+$ rspec
+```
 
 Running the Application:
 ------------------------
-WIP
+From root directory:
+```shell
+$ ruby run.rb
+```
+Output:
+```shell
+Machine Contents
+[#<Product:0x007fc9ca9028d8 @id=0, @price=55>,     
+#<Product:0x007fc9ca05ff78 @id=1, @price=75>,     
+#<Product:0x007fc9ca05eec0 @id=2, @price=97>]
+Please enter a product id:
+1
+Please enter money provided
+80
+[#<Product:0x007fc9ca05ff78 @id=1, @price=75>, [#<Change:0x007fc9ca04d648 @denomination=5, @amount=1>]]
+```
